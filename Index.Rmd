@@ -17,10 +17,10 @@ Column {data-width=650}
 
 ```{r}
 shared_diamonds_plot <- SharedData$new(diamonds)
- ggplotly(shared_diamonds_plot %>% 
+p1<-  ggplotly(shared_diamonds_plot %>% 
   ggplot(aes(cut, group=cut, fill=cut))+
   geom_bar()+theme_classic()+ylab("Count")+xlab("Cut"))
-
+p1
 ```
 
 > Source: Diamonds dataset
@@ -31,9 +31,10 @@ Column {data-width=350}
 ### Dimaond Frequency by Carat
 
 ```{r, message=FALSE, error=FALSE}
- ggplotly(shared_diamonds_plot %>% 
+p2 <-  ggplotly(shared_diamonds_plot %>% 
             ggplot(aes(price,colour=cut))+
             geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price"))
+p2
 ```
 
 >Source: Diamonds dataset
@@ -41,8 +42,9 @@ Column {data-width=350}
 ### Interactive Linear Model
 
 ```{r}
-ggplotly(shared_diamonds_plot %>% 
+p3 <- ggplotly(shared_diamonds_plot %>% 
            ggplot(aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat"))
+p3
 ```
 
 >Source: Diamonds dataset
