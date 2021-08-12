@@ -13,14 +13,14 @@ pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,crosstalk)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Diamonds Chart
+### Diamonds Chart by Colour
 
 ```{r}
 shared_diamonds_plot <- SharedData$new(diamonds)
-p1<-  ggplotly(shared_diamonds_plot %>% 
-  ggplot(aes(cut, group=cut, fill=cut))+
-  geom_bar()+theme_classic()+ylab("Count")+xlab("Cut"))
-p1
+p1<-  shared_diamonds_plot %>% 
+  ggplot(aes(color, group=color, fill=color))+
+  geom_bar()+theme_classic()+ylab("Count")+xlab("Color")
+ggplotly(p1)
 ```
 
 > Source: Diamonds dataset
@@ -31,10 +31,10 @@ Column {data-width=350}
 ### Dimaond Frequency by Carat
 
 ```{r, message=FALSE, error=FALSE}
-p2 <-  ggplotly(shared_diamonds_plot %>% 
+p2 <- shared_diamonds_plot %>% 
             ggplot(aes(price,colour=cut))+
-            geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price"))
-p2
+            geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price")
+ggplotly(p2)
 ```
 
 >Source: Diamonds dataset
@@ -42,9 +42,9 @@ p2
 ### Interactive Linear Model
 
 ```{r}
-p3 <- ggplotly(shared_diamonds_plot %>% 
-           ggplot(aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat"))
-p3
+p3 <- shared_diamonds_plot %>% 
+           ggplot(aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat")
+ggplotly(p3)
 ```
 
 >Source: Diamonds dataset
