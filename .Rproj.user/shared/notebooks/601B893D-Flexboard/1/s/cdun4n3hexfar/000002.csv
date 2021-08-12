@@ -1,4 +1,0 @@
-"0","p1 <- ggplot(shared_diamonds_plot,aes(carat,price))+geom_point()+geom_smooth(se=TRUE)"
-"2","Error in ggplot(shared_diamonds_plot, aes(carat, price)) : 
-  object 'shared_diamonds_plot' not found
-"
