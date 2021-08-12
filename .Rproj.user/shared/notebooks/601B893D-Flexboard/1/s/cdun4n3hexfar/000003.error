@@ -1,0 +1,1 @@
+{"frames":[{"func":"ggplot(shared_diamonds_plot, aes(carat, price))","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in ggplot(shared_diamonds_plot, aes(carat, price)) : \n  object 'shared_diamonds_plot' not found\n"}

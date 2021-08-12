@@ -1,0 +1,48 @@
+---
+title: "Dashboard Showcase"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,crosstalk)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Diamonds Chart
+
+```{r}
+shared_diamonds_plot <- SharedData$new(diamonds)
+ ggplotly(shared_diamonds_plot %>% 
+  ggplot(aes(cut, group=cut, fill=cut))+
+  geom_bar()+theme_classic()+ylab("Count")+xlab("Cut"))
+
+```
+
+> Source: Diamonds dataset
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Dimaond Frequency by Carat
+
+```{r, message=FALSE, error=FALSE}
+ ggplotly(shared_diamonds_plot %>% 
+            ggplot(aes(price,colour=cut))+
+            geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price"))
+```
+
+>Source: Diamonds dataset
+
+### Interactive Linear Model
+
+```{r}
+ggplotly(shared_diamonds_plot %>% 
+           ggplot(aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat"))
+```
+
+>Source: Diamonds dataset
