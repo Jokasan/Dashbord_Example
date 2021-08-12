@@ -1,13 +1,16 @@
 ---
 title: "Dashboard Example"
+author: "Nils Indreiten"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    social: menu
+    source_code: embed
 ---
 
 ```{r setup, include=FALSE}
-pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,crosstalk)
+pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,plyr)
 ```
 
 Column {data-width=650}
@@ -16,10 +19,9 @@ Column {data-width=650}
 ### Diamonds Chart by Colour
 
 ```{r}
-p1<-  diamonds %>% 
-  ggplot(aes(color, group=color, fill=color))+
+p<-  ggplot(diamonds,aes(color, group=color, fill=color))+
   geom_bar()+theme_classic()+ylab("Count")+xlab("Color")
-ggplotly(p1)
+ggplotly(p)
 ```
 
 > Source: Diamonds dataset
@@ -30,10 +32,9 @@ Column {data-width=350}
 ### Diamond Frequency by Cut
 
 ```{r, message=FALSE, error=FALSE}
-p2 <- diamonds %>% 
-            ggplot(aes(price,colour=cut))+
+p <- ggplot(diamonds,aes(price,colour=cut))+
             geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price")
-ggplotly(p2)
+ggplotly(p)
 ```
 
 >Source: Diamonds dataset
@@ -41,9 +42,8 @@ ggplotly(p2)
 ### Interactive Linear Model
 
 ```{r}
-p3 <- diamonds %>% 
-           ggplot(aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat")
-ggplotly(p3)
+p <- ggplot(diamonds,aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat")
+ggplotly(p)
 ```
 
 >Source: Diamonds dataset
