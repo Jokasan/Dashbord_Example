@@ -3,6 +3,8 @@ title: "Dashboard Example"
 author: "Nils Indreiten"
 output: 
   flexdashboard::flex_dashboard:
+    theme:
+      version: 3
     orientation: columns
     vertical_layout: fill
     social: menu
@@ -10,40 +12,42 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,plyr)
+pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,plyr,data.table,crosstalk)
+d <- sample_n(diamonds, size=100, replace = T)
+d <- crosstalk::SharedData$new(d)
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Diamonds Chart by Colour
+### Diamond Chart by Colour
 
 ```{r}
-p<-  ggplot(diamonds,aes(color, group=color, fill=color))+
+p<-  ggplot(d,aes(color, group=color, fill=color))+
   geom_bar()+theme_classic()+ylab("Count")+xlab("Color")
 ggplotly(p)
 ```
 
-> Source: Diamonds dataset
+> Source: Diamonds dataset (random sample of 100 diamonds)
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Diamond Frequency by Cut
+### Diamond Frequency and Price by Cut
 
 ```{r, message=FALSE, error=FALSE}
-p <- ggplot(diamonds,aes(price,colour=cut))+
+p <- ggplot(d,aes(price,colour=cut))+
             geom_freqpoly(binwidth=500)+theme_minimal()+ylab("Count")+xlab("Price")
 ggplotly(p)
 ```
 
->Source: Diamonds dataset
+>Source: Diamonds dataset (random sample of 100 diamonds)
 
-### Interactive Linear Model
+### Carat and Price Relationship
 
 ```{r}
-p <- ggplot(diamonds,aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat")
+p <- ggplot(d,aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal()+ylab("Price")+xlab("Carat")
 ggplotly(p)
 ```
 
->Source: Diamonds dataset
+>Source: Diamonds dataset (random sample of 100 diamonds)
