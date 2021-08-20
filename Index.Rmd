@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 pacman::p_load(flexdashboard,ggplot2,plotly,tidyverse,plyr,data.table,crosstalk)
-d <- sample_n(diamonds, size=100, replace = T)
+d <- sample_n(diamonds, size=1000, replace = T)
 d <- crosstalk::SharedData$new(d)
 ```
 
@@ -23,12 +23,12 @@ Column {data-width=650}
 ### Diamond Chart by Colour
 
 ```{r}
-p<-  ggplot(d,aes(color, group=color, fill=color))+
-  geom_bar()+theme_classic()+ylab("Count")+xlab("Color")
+p<-  ggplot(d,aes(color, fill=cut))+
+  geom_bar()+theme_classic()+ylab("Count")+xlab("Color")+theme(legend.title=element_blank())
 ggplotly(p)
 ```
 
-> Source: Diamonds dataset (random sample of 100 diamonds)
+> Source: Diamonds dataset (random sample of 1000 diamonds)
 
 Column {data-width=350}
 -----------------------------------------------------------------------
@@ -41,7 +41,7 @@ p <- ggplot(d,aes(price,colour=cut))+
 ggplotly(p)
 ```
 
->Source: Diamonds dataset (random sample of 100 diamonds)
+
 
 ### Carat and Price Relationship
 
@@ -50,4 +50,4 @@ p <- ggplot(d,aes(carat,price))+geom_point()+geom_smooth(se=TRUE)+theme_minimal(
 ggplotly(p)
 ```
 
->Source: Diamonds dataset (random sample of 100 diamonds)
+
