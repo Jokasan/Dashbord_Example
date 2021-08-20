@@ -20,11 +20,11 @@ d <- crosstalk::SharedData$new(d)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Diamond Chart by Colour
+### Diamond count by by color and count
 
 ```{r}
 p<-  ggplot(d,aes(color, fill=cut))+
-  geom_bar()+theme_minimal()+ylab("Count")+xlab("Color")+theme(legend.title=element_blank())
+  geom_bar()+theme_minimal()+ylab("Count")+xlab("Color")
 ggplotly(p)
 ```
 
