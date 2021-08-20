@@ -20,7 +20,7 @@ d <- crosstalk::SharedData$new(d)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Diamond count by by color and count
+### Diamond Bar Chart
 
 ```{r}
 p<-  ggplot(d,aes(color, fill=cut))+
@@ -28,7 +28,7 @@ p<-  ggplot(d,aes(color, fill=cut))+
 ggplotly(p)
 ```
 
-> Source: Diamonds dataset (random sample of 1000 diamonds)
+> Source: Diamonds dataset, included in base R (random sample of 1000 diamonds)
 
 Column {data-width=350}
 -----------------------------------------------------------------------
